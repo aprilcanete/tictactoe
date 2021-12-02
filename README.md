@@ -1,6 +1,6 @@
-# tictactoe game
+# tictactoe 
 
-An experiment in SVG turns into a complete mess of a flushable toilet. Clean up later. 
+ Play the game -
 
 try it [here](https://aprilcanete.github.io/tictactoe/)
 
