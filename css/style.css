@@ -83,7 +83,7 @@ a {
 body#game {
     background-color: #fff;
     box-sizing: border-box;
-    background-image: url('../images/coffee-bagel-background.jpeg');
+    /* background-image: url('../images/coffee-bagel-background.jpeg'); */
     background-size: cover;
 }
 
@@ -115,7 +115,24 @@ header {
 }
 
 .game-box {
-    /* border: 1px solid black; */
     background-color: rgba(247, 239, 219, 0.8);
 }
+.alert-msg-wrapper {
+    position: relative;
+    text-align: center;
+    height: 50px;
+    padding: 40px;
+}
 
+.play-again-btn {
+    position: relative;
+    height: 50px;
+    width: 300px;
+}
+
+.play-again-btn-txt {
+    left: 47%;
+    top: 25%;
+    position: absolute;  
+    color: #fff; 
+}
