@@ -23,7 +23,7 @@ body#index {
 
 .logo {
     font-family: 'Sacramento', cursive;
-    font-size: 8em;
+    font-size: 10vw;
     margin-bottom: 0;
 }
 
@@ -41,7 +41,7 @@ a {
     font-family: 'Sacramento', cursive;
     /* border: 1px solid gray; */
     width: 200px;
-    height: 50px;
+    height: 80px;
     margin: 100px auto;
     text-align: center;
     padding: 20px;
@@ -87,6 +87,13 @@ body#game {
     background-size: cover;
 }
 
+* {
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    box-sizing:border-box;
+} 
+
 header {
     text-align: center;
 }
@@ -104,7 +111,7 @@ header {
 }
 
 .game-board {
-    width: 600px;
+    width: 56vw;
     height: 500px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -116,8 +123,12 @@ header {
 
 .game-box {
     background-color: rgba(247, 239, 219, 0.8);
+    text-align: center;
+    position: relative;
+    padding: 20px;
 }
-.alert-msg-wrapper {
+.play-again-btn-wrapper {
+    display: none;
     position: relative;
     text-align: center;
     height: 50px;
@@ -131,8 +142,36 @@ header {
 }
 
 .play-again-btn-txt {
+    font-size: 20px;
     left: 47%;
-    top: 25%;
+    top: 40%;
     position: absolute;  
     color: #fff; 
 }
+
+.alert-message {
+    animation: color-change 1s infinite;
+}
+
+@keyframes color-change {
+    0% { color: red; }
+    50% { color: blue; }
+    100% { color: orange; }
+  }
+
+  .player-icon {
+      height: 7vw;
+      position: absolute;
+      left: 27%;
+      top: 20%;
+  }
+
+
+  .hidden-div {
+      background-color: rgba(247, 239, 219, 0.8);
+      position: 'absolute';
+      width: 100%;
+      height: 100%;
+    
+  }
+
