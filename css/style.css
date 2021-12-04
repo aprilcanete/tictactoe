@@ -106,7 +106,8 @@ header {
 
 .player-box {
     height: 200px;
-    width: 80%;
+    padding: 20px;
+    /* width: 80%; */
     text-align: center;
 }
 
@@ -154,24 +155,57 @@ header {
 }
 
 @keyframes color-change {
-    0% { color: red; }
-    50% { color: blue; }
+    0% { color: orange; }
+    50% { color: skyblue; }
     100% { color: orange; }
   }
 
-  .player-icon {
-      height: 7vw;
-      position: absolute;
-      left: 27%;
-      top: 20%;
+.player-icon {
+    height: 60%;
+    position: absolute;
+    left: 29%;
+    top: 20%;
   }
 
 
-  .hidden-div {
-      background-color: rgba(247, 239, 219, 0.8);
-      position: 'absolute';
-      width: 100%;
-      height: 100%;
-    
-  }
+.hidden-div {
+    background-color: rgba(247, 239, 219, 0.8);
+    position: 'absolute';
+    width: 100%;
+    height: 100%;
 
+}
+
+
+.player-icon-move {
+    height: 60%;
+    position: absolute;
+    left: 29%;
+    top: 20%;
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.5s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.player-one-img {
+    height: 80%;
+}
+
+.player-two-img {
+    height: 80%;
+}

@@ -1,16 +1,22 @@
  console.log('tictactoe');
 
- var playerOne = {name: 'player 1', choices:[] };
- var playerTwo = {name: 'player 2', choices:[] };
+ var playerOne = {name: 'Player 1', choices:[], icon: 'coffee' };
+ var playerTwo = {name: 'Player 2', choices:[], icon: 'bagel' };
  var gameBoxes = document.querySelectorAll('.game-box');
  var playAgainBtnWrap = document.querySelector('.play-again-btn-wrapper');
  var playAgainBtn = document.querySelector('.play-again-btn');
+ var playAgainBtnP = document.querySelector('.play-again-btn-txt');
+
  var winningCombos = [[1,2,3], [1,5,9], [1,4,7], [4,5,6], [7,8,9], [2,5,8], [3,6,9],
             [3,5,7]];
  var counter = 0;
  var isGameDone = false;
+ var userClicked;
 
 function addElement(str) {
+    console.log('add element');
+    console.log(str);
+
     var newHeading = document.createElement("h1");
     var newContent = document.createTextNode(str);
 
@@ -25,80 +31,122 @@ function addElement(str) {
    playAgainBtnWrap.style.display = 'block';
 }
 
+function shakeImage(arr) {
+
+    for (let i = 0; i < arr.length; i++) {
+        var boxNum = arr[i];
+        
+        for (let i = 0; i < gameBoxes.length; i++) {
+            var box = gameBoxes[i];
+            
+            if (Number(box.dataset.number) == boxNum) {
+                var item = box.firstElementChild;
+
+                item.className = 'player-icon-move';
+            }
+        }
+    }   
+}
+
 function gameCheck(player, choice) {
+
+    // console.log('game check');
+    // console.log(player);
+    // console.log(choice);
 
         for (let i= 0; i < winningCombos.length; i++) {
             var combo = winningCombos[i];
 
             var isComboWithinUserChoices = combo.every(number => choice.includes(number));
+
+            var result = choice.filter(function(num) {return combo.includes(num)} )
+
+            //console.log(result);
            
             // console.log(combo);
             // console.log(choice);
             // console.log(isComboWithinUserChoices);
 
             if (isComboWithinUserChoices) {
+                
+                // console.log('WIN');
 
                 isGameDone = true;
 
                 addElement(`${player} wins!`);
 
+                shakeImage(result);
+
                 for (let i = 0; i < gameBoxes.length; i++) {
                     var box = gameBoxes[i];
 
                     box.removeEventListener('click', handleClick)
-                }
-                     
+                }             
             }    
         }
 }
 
 function handleClick(event) {
-    var userClicked = event.target;
+    userClicked = event.target;
     var playerIcon = document.createElement('img');
 
     playerIcon.className = 'player-icon';
     
-    counter++;
-    //console.log(counter);
-    //console.log(playerOne);
+    
+    // console.log(counter);
+    // console.log(playerOne);
 
-
-    if (counter %2 !== 0) {
-        
-        playerIcon.src = 'images/coffee-icon.webp';
-        userClicked.appendChild(playerIcon);
-
-        playerOne.choices.push(Number(userClicked.dataset.number));
-
-        //console.log(playerOne.name + ' picks: ' + playerOne.choices);
-
-        gameCheck(playerOne.name, playerOne.choices);
-        
+    if (userClicked.innerHTML !== '') {
+        // console.log('inner html is NOT null');
+        return;
     } else {
+        // console.log('inner html is null');
 
-        playerIcon.src = 'images/bagel-icon.webp';
-        userClicked.appendChild(playerIcon);
+        counter++;
 
-        playerTwo.choices.push(Number(userClicked.dataset.number));
-
-        //console.log(playerTwo.name + ' picks: ' + playerTwo.choices);
-
-        gameCheck(playerTwo.name, playerTwo.choices);       
+        if (counter %2 !== 0) {
+            
+            playerIcon.src = 'images/coffee-icon.webp';
+            userClicked.appendChild(playerIcon);
+    
+            playerOne.choices.push(Number(userClicked.dataset.number));
+    
+            // console.log(playerOne.name + ' picks: ' + playerOne.choices);
+    
+            gameCheck(playerOne.name, playerOne.choices);
+            
+        } else {
+    
+            playerIcon.src = 'images/bagel-icon.webp';
+            userClicked.appendChild(playerIcon);
+    
+            playerTwo.choices.push(Number(userClicked.dataset.number));
+    
+            // console.log(playerTwo.name + ' picks: ' + playerTwo.choices);
+    
+            gameCheck(playerTwo.name, playerTwo.choices);       
+        }
+    
+        if (counter == gameBoxes.length && isGameDone != true) {
+            addElement(`It's a draw!`);
+            for (let i = 0; i < gameBoxes.length; i++) {
+                var box = gameBoxes[i];
+    
+                box.removeEventListener('click', handleClick)
+            }    
+        }
     }
 
-    if (counter == gameBoxes.length && isGameDone != true) {
-        addElement(`It's a draw!`);
-    }
+    return userClicked;
 }
-
 
 function handleReset() {
     window.location.reload();
 }
-
 
 gameBoxes.forEach(box => 
     box.addEventListener('click', handleClick)
     );
 
 playAgainBtn.addEventListener('click', handleReset);
+playAgainBtnP.addEventListener('click', handleReset);
