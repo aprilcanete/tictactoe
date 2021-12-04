@@ -8,7 +8,6 @@ body#index {
 }
 
 .container {
-
     background: rgba(250, 239, 224, 0.6);
     border-radius: 10px;
     text-align: center;
@@ -17,8 +16,7 @@ body#index {
     top: 15%;
     left: 25%;
     right: 25%;
-    height: 60%;
-    
+    height: 60%;   
 }
 
 .logo {
@@ -100,19 +98,52 @@ header {
 
 .main {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 3fr 1fr; /**repeat(3, 1fr);**/
     /* border: 1px solid black; */
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 3fr)); */
 }
 
-.player-box {
-    height: 200px;
+.player-box-one {
+    height: 250px;
+    padding: 20px;
+    /* width: 80%; */
+    text-align: center;
+}
+
+.player-box-animate {
+    height: 250px;
+    padding: 10px 40px;
+    text-align: center;
+    border-radius: 50%;
+    border: 30px solid white;
+
+    animation: bgc-change 2s infinite linear; 
+}
+
+@keyframes bgc-change {
+    0% { background-color: lemonchiffon; }
+    50% { background-color: lavender; }
+    100% { background-color: lemonchiffon; }
+  }
+
+/* @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  } */
+
+.player-box-two {
+    height: 250px;
     padding: 20px;
     /* width: 80%; */
     text-align: center;
 }
 
 .game-board {
-    width: 56vw;
+    width: 61vw;
     height: 500px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -140,6 +171,7 @@ header {
     position: relative;
     height: 50px;
     width: 300px;
+    cursor: pointer;
 }
 
 .play-again-btn-txt {
@@ -147,7 +179,8 @@ header {
     left: 47%;
     top: 40%;
     position: absolute;  
-    color: #fff; 
+    color: #fff;
+    cursor: pointer;
 }
 
 .alert-message {
@@ -163,7 +196,7 @@ header {
 .player-icon {
     height: 60%;
     position: absolute;
-    left: 29%;
+    left: 40%;
     top: 20%;
   }
 
@@ -180,7 +213,7 @@ header {
 .player-icon-move {
     height: 60%;
     position: absolute;
-    left: 29%;
+    left: 40%;
     top: 20%;
     /* Start the shake animation and make the animation last for 0.5 seconds */
     animation: shake 0.5s;
@@ -203,9 +236,22 @@ header {
 }
 
 .player-one-img {
-    height: 80%;
+    height: 60%;
 }
 
 .player-two-img {
-    height: 80%;
+    height: 60%;
 }
+
+  /* @media only screen and (max-width: 768px) {
+  
+    [class*="col-"] {
+      width: 100%;
+    }
+  } */
+
+  /* @mediaonly screen and  (min-width:480px) {
+    .main {
+        grid-template-columns: 1fr;
+    } 
+  } */

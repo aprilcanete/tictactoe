@@ -1,21 +1,24 @@
  console.log('tictactoe');
 
- var playerOne = {name: 'Player 1', choices:[], icon: 'coffee' };
- var playerTwo = {name: 'Player 2', choices:[], icon: 'bagel' };
  var gameBoxes = document.querySelectorAll('.game-box');
  var playAgainBtnWrap = document.querySelector('.play-again-btn-wrapper');
  var playAgainBtn = document.querySelector('.play-again-btn');
  var playAgainBtnP = document.querySelector('.play-again-btn-txt');
+ var playerBoxOne = document.querySelector('.player-box-one');
+ var playerBoxTwo = document.querySelector('.player-box-two');
 
- var winningCombos = [[1,2,3], [1,5,9], [1,4,7], [4,5,6], [7,8,9], [2,5,8], [3,6,9],
-            [3,5,7]];
+ var playerOne = {name: 'Player 1', choices:[], icon: 'coffee' };
+ var playerTwo = {name: 'Player 2', choices:[], icon: 'bagel' };
+ var winningCombos = [[1,2,3], [1,5,9], [1,4,7], [4,5,6], [7,8,9], [2,5,8], [3,6,9], [3,5,7]];
  var counter = 0;
  var isGameDone = false;
  var userClicked;
 
+ playerBoxOne.className = 'player-box-animate';
+
 function addElement(str) {
-    console.log('add element');
-    console.log(str);
+    // console.log('add element');
+    // console.log(str);
 
     var newHeading = document.createElement("h1");
     var newContent = document.createTextNode(str);
@@ -54,36 +57,34 @@ function gameCheck(player, choice) {
     // console.log(player);
     // console.log(choice);
 
-        for (let i= 0; i < winningCombos.length; i++) {
-            var combo = winningCombos[i];
+    for (let i= 0; i < winningCombos.length; i++) {
+        var combo = winningCombos[i];
 
-            var isComboWithinUserChoices = combo.every(number => choice.includes(number));
+        var isComboWithinUserChoices = combo.every(number => choice.includes(number));
 
-            var result = choice.filter(function(num) {return combo.includes(num)} )
+        var result = choice.filter(function(num) {return combo.includes(num)} )
 
-            //console.log(result);
-           
-            // console.log(combo);
-            // console.log(choice);
-            // console.log(isComboWithinUserChoices);
+        //console.log(result); 
+        // console.log(combo);
+        // console.log(choice);
+        // console.log(isComboWithinUserChoices);
 
-            if (isComboWithinUserChoices) {
-                
-                // console.log('WIN');
+        if (isComboWithinUserChoices) {
+            playerBoxOne.className = 'player-box-one';
+            playerBoxTwo.className = 'player-box-two';
 
-                isGameDone = true;
+            isGameDone = true;
 
-                addElement(`${player} wins!`);
+            addElement(`${player} wins!`);
+            shakeImage(result);
 
-                shakeImage(result);
+            for (let i = 0; i < gameBoxes.length; i++) {
+                var box = gameBoxes[i];
 
-                for (let i = 0; i < gameBoxes.length; i++) {
-                    var box = gameBoxes[i];
-
-                    box.removeEventListener('click', handleClick)
-                }             
-            }    
-        }
+                box.removeEventListener('click', handleClick)
+            }             
+        }    
+    }
 }
 
 function handleClick(event) {
@@ -91,8 +92,7 @@ function handleClick(event) {
     var playerIcon = document.createElement('img');
 
     playerIcon.className = 'player-icon';
-    
-    
+      
     // console.log(counter);
     // console.log(playerOne);
 
@@ -108,6 +108,9 @@ function handleClick(event) {
             
             playerIcon.src = 'images/coffee-icon.webp';
             userClicked.appendChild(playerIcon);
+
+            playerBoxOne.className = 'player-box-one';
+            playerBoxTwo.className = 'player-box-animate';
     
             playerOne.choices.push(Number(userClicked.dataset.number));
     
@@ -119,6 +122,9 @@ function handleClick(event) {
     
             playerIcon.src = 'images/bagel-icon.webp';
             userClicked.appendChild(playerIcon);
+
+            playerBoxTwo.className = 'player-box-two';
+            playerBoxOne.className = 'player-box-animate';
     
             playerTwo.choices.push(Number(userClicked.dataset.number));
     
@@ -128,7 +134,11 @@ function handleClick(event) {
         }
     
         if (counter == gameBoxes.length && isGameDone != true) {
+            playerBoxOne.className = 'player-box-one';
+            playerBoxTwo.className = 'player-box-two';
+
             addElement(`It's a draw!`);
+
             for (let i = 0; i < gameBoxes.length; i++) {
                 var box = gameBoxes[i];
     
