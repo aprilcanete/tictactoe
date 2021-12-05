@@ -150,7 +150,7 @@ header {
 
 .game-board {
     width: 61vw;
-    height: 600px;
+    height: 500px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     text-align: center;
@@ -202,7 +202,7 @@ header {
 .player-icon {
     height: 60%;
     position: absolute;
-    left: 40%;
+    left: 30%;
     top: 20%;
   }
 
@@ -219,7 +219,7 @@ header {
 .player-icon-move {
     height: 60%;
     position: absolute;
-    left: 40%;
+    left: 30%;
     top: 20%;
     /* Start the shake animation and make the animation last for 0.5 seconds */
     animation: shake 0.5s;

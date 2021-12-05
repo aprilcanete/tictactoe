@@ -1,8 +1,6 @@
 # tictactoe 
 
- Play the game -
-
-try it [here](https://aprilcanete.github.io/tictactoe/)
+ Play the game [here](https://aprilcanete.github.io/tictactoe/)
 
 ## Subheading
 
